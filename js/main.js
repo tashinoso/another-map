@@ -20,7 +20,6 @@ $(function(){
     updateCanvas();
   };
 
-
   var pen = new Image();
   pen.src = "images/pen1.png";
   var eraser = new Image();
@@ -51,7 +50,6 @@ $(function(){
     draw(e);
     updateCanvas();
   });
-
   $('#canv-draw').on('mousemove', function(e){
     $('#pointer').css('top', e.offsetY + 'px');
     $('#pointer').css('left', e.offsetX + 'px');
@@ -59,6 +57,7 @@ $(function(){
       return;
     }
     draw(e);
+    // updateCanvas();
   });
   $('#canv-draw').on('mouseover', function(){
     $('#pointer').css('opacity', '1');
@@ -67,6 +66,19 @@ $(function(){
     $('#pointer').css('opacity', '0');
   });
 
+  function doResize() {
+    const saveBg = new Image();
+    saveBg.src = canvas.toDataURL("image/png");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    c_width  = $('#content').width();
+    c_height = $('#content').height();
+    canvas.width = c_width;
+    canvas.height = c_height; 
+    ctx.drawImage(saveBg, 0, 0, 640, 640, 0, 0, c_width, c_height);
+    app.view.width = c_width;
+    app.view.height = c_height; 
+    updateCanvas();
+  }
 
   // PIXI -------------------------------------
   const app = new PIXI.Application({
@@ -92,6 +104,7 @@ $(function(){
   }
   // PIXI -------------------------------------
 
+  // Controls -------------------------------------
   $("#btn-pen-up").on('click', function(){
     isEraser = false;
     if($("#btn-pen-up").hasClass('active')){
@@ -131,21 +144,22 @@ $(function(){
   });
 
   $('#btn-resize').on('click', function(){
-    $('#wrapper').width(960);
-    $('#content').width(960);
-    $('#content').height(480);
+    $('#resize-control').slideToggle('fast');
+    $('#resize-w').val(c_width);
+    $('#resize-h').val(c_height);
+  });
+  $('#btn-resize-exec').on('click', function(){
+    const inputW = parseInt($('#resize-w').val());
+    const inputH = parseInt($('#resize-h').val());
+    $('#wrapper').width(inputW);
+    $('#content').width(inputW);
+    $('#content').height(inputH);
     doResize();
   });
+  $('#btn-resize-cancel').on('click', function(){
+    $('#resize-control').slideUp('fast');
+  });
+  // Controls -------------------------------------
 
-  function doResize() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    c_width  = $('#content').width();
-    c_height = $('#content').height();
-    canvas.width = c_width;
-    canvas.height = c_height; 
-    ctx.drawImage(bg, 0, 0, 640, 640, 0, 0, c_width, c_height);
-    app.view.width = c_width;
-    app.view.height = c_height; 
-    updateCanvas();
-  }
+
 });
