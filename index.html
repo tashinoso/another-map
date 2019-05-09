@@ -14,9 +14,15 @@
     <script src="js/myfilter.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-xVVam1KS4+Qt2OrFa+VdRUoXygyKIuNWUUUBZYv+n27STsJ7oDOHJgfF0bNKLMJF" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+  <header id="page-header">
+    <span id="page-menu"><i class="fas fa-bars"></i></span>
+    <h1 id="page-title">Another Map</h1>
+    <a href="https://twitter.com/tashinoso" class="twitter-link"><i class="fab fa-twitter"></i></a>
+  </header>
   <div id="wrapper">
     <nav id="controls">
       <div class="group">
@@ -31,10 +37,16 @@
           <button id="btn-download"><i class="far fa-image"></i></button>
       </div>
     </nav>
+    <div id="resize-control">
+    </div>
     <div id="content">
       <canvas id="canv-draw"></canvas>
       <div id="canv-shade"><div id="pointer"></div></div>
     </div>
   </div>
+  <footer id="page-footer">
+      <p class="footer-title">Another Map</p>
+      <a href="https://twitter.com/tashinoso" class="twitter-link">@tashinoso</a>
+  </footer>
 </body>
 </html>

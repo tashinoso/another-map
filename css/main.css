@@ -1,16 +1,67 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: #f5f3e6;
 }
+* {
+  box-sizing: border-box;
+}
+#page-header {
+  margin: 0 0 20px 0;
+  padding: 5px 30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #cbc9be;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  color: #5b524f;
+  font-size: 18px;
+  line-height: 1;
+}
+#page-menu {
+  visibility: hidden;
+}
+#page-title {
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  font-weight: normal;
+  line-height: 1;
+  font-family: 'Tangerine', cursive;
+}
+#page-footer {
+  margin: 0;
+  padding: 32px;
+  width: 100%;
+  background-color: #cbc9be;
+  color: #5b524f;
+  font-size: 14px;
+  text-align: center;
+}
+.footer-title {
+  margin: 0;
+  padding: 0;
+  font-size: 36px;
+  font-weight: normal;
+  line-height: 1;
+  font-family: 'Tangerine', cursive;
+}
+.twitter-link {
+  color: #1da1f2;
+  text-decoration: none;
+}
+
 #wrapper {
   width: 642px;
   margin: 0 auto;
 }
 #content {
   position: relative;
-  margin: 0 auto;
+  margin: 10px 0 80px 0;
   width: 640px;
   height: 640px;
+  box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
 }
 #canv-draw,
 #canv-shade {
@@ -53,14 +104,14 @@ canvas {
   justify-content: flex-end;
   align-items: center;
   background-color: #333;
+  border-radius: 4px;
+  box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
   color: #fff;
   font-size: 18px;
 }
-
 #controls *:focus{
   outline: none;
 }
-
 #controls .title {
   margin: 0 20px 0 0;
   padding: 0 10px;
@@ -70,24 +121,29 @@ canvas {
 #controls .group {
   margin: 0 10px;
 }
-
 #controls button {
   height: 36px;
-  background-color: transparent;
-  border: solid 1px #999;
+  background-color: #333;
+  border: none;
   border-radius: 4px;
   color: #fff;
   font-size: 20px;
 }
-#controls button.active{
-  background-color: #ddd;
-  color: #333;
+#controls button:hover {
+  background-color: #555;
+}
+#controls button:focus,
+#controls button:active {
+  background-color: #444;
 }
 
+#controls button.active{
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+}
 #slider-pen-size {
   width: 100px;
 }
-
 #slider-pen-size .ui-slider-handle {
   width: 18px;
   height: 18px;
@@ -96,4 +152,8 @@ canvas {
 #slider-pen-size.ui-slider-horizontal {
   height: 9px;
   background-color: transparent;
+}
+#resize-controls {
+
+
 }
