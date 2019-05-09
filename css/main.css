@@ -1,0 +1,99 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+#wrapper {
+  width: 642px;
+  margin: 0 auto;
+}
+#content {
+  position: relative;
+  margin: 0 auto;
+  width: 640px;
+  height: 640px;
+}
+#canv-draw,
+#canv-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+}
+canvas {
+  margin: 0;
+  padding: 0;
+}
+#canv-draw {
+  cursor: crosshair;
+  opacity: 0;
+  z-index: 1;
+}
+#canv-shade {
+  pointer-events: none;
+  z-index: 0;
+}
+#pointer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  transform: translate(-50%, -50%);
+  border: solid 1px rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  opacity: 0;
+  z-index: 3;
+  transition: opacity 0.3s;
+}
+#controls {
+  width: 100%;
+  height: 44px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  font-size: 18px;
+}
+
+#controls *:focus{
+  outline: none;
+}
+
+#controls .title {
+  margin: 0 20px 0 0;
+  padding: 0 10px;
+  font-size: 14px;
+  font-weight: 300;
+}
+#controls .group {
+  margin: 0 10px;
+}
+
+#controls button {
+  height: 36px;
+  background-color: transparent;
+  border: solid 1px #999;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 20px;
+}
+#controls button.active{
+  background-color: #ddd;
+  color: #333;
+}
+
+#slider-pen-size {
+  width: 100px;
+}
+
+#slider-pen-size .ui-slider-handle {
+  width: 18px;
+  height: 18px;
+  border-radius: 40px;
+}
+#slider-pen-size.ui-slider-horizontal {
+  height: 9px;
+  background-color: transparent;
+}
