@@ -26,8 +26,14 @@ $(function(){
     ctx.drawImage(bg, 0, 0);
     initCanvas();
   };
-  function getBgName(val) {
-    const num = (val) ? val : getRandomInt(bgImageNum);
+  function getBgName() {
+    let hash = (location.hash.length >= 2) ? parseInt(location.hash.replace('#', '')) : null;
+    if(hash) {
+      hash = Math.max(1, hash);
+      hash = Math.min(bgImageNum, hash);
+    }
+    const num = (hash) ? hash : getRandomInt(bgImageNum);
+    console.log('map #' + num);
     return bgImagePath + 'bg' + num + '.jpg';
   }
   function getRandomInt(max) {
