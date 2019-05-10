@@ -162,7 +162,9 @@ $(function(){
     const anchor = document.createElement('a');
     anchor.href = app.view.toDataURL("image/png");
     anchor.download = downloadFileName + '.png';
+    $('body').append(anchor);
     anchor.click();
+    anchor.remove();
   });
 
   $('#btn-resize').on('click', function(){
@@ -180,6 +182,12 @@ $(function(){
   });
   $('#btn-resize-cancel').on('click', function(){
     $('#resize-control').slideUp('fast');
+  });
+
+  $('#btn-flat').on('click', function(){
+    ctx.fillStyle = 'rgb(200, 200, 200)';
+    ctx.fillRect(0, 0, c_width, c_height);
+    updateCanvas();
   });
   // Controls -------------------------------------
 
