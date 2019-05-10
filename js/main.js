@@ -1,5 +1,8 @@
 $(function(){
-  const downloadFileName = "anothermap_image";
+  const penImage = 'images/pen1_b.png';
+  const eraserImage = 'images/pen1_w.png';
+  const hightTexImage = 'images/map_height.png';
+  const downloadFileName = 'anothermap_image';
   const penScales = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 5.0];
   const penSize = 50.0;
 
@@ -21,9 +24,9 @@ $(function(){
   };
 
   var pen = new Image();
-  pen.src = "images/pen2_b.png";
+  pen.src = penImage;
   var eraser = new Image();
-  eraser.src = "images/pen2_w.png";
+  eraser.src = eraserImage;
 
   let prevSec = new Date() * 1;
   function draw(e) {
@@ -89,7 +92,7 @@ $(function(){
   $('#canv-shade').append(app.view);
 
   // Set Filter
-  const tex = PIXI.Sprite.from('images/map_height.png');
+  const tex = PIXI.Sprite.from(hightTexImage);
   let myFilter = new PIXI.filters.MyFilter(tex.texture);
   app.stage.filters = [myFilter];
 
