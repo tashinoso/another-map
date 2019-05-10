@@ -2,9 +2,13 @@ $(function(){
   const penImage = 'images/pen1_b.png';
   const eraserImage = 'images/pen1_w.png';
   const hightTexImage = 'images/map_height.png';
+  const bgImagePath = 'images/bg/';
+  const bgImageNum = 30;
   const downloadFileName = 'anothermap_image';
   const penScales = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 5.0];
   const penSize = 50.0;
+  const flatConfirmText = 'すべての陸地を海に沈めます。\nよろしいですか？\n';
+  const flatStyle = 'rgb(245, 245, 245)';
 
   let penScale = 1.0;
   let isEraser = false;
@@ -16,16 +20,24 @@ $(function(){
   canvas.width = c_width;
   canvas.height = c_height; 
 
-  var bg = new Image();
-  bg.src = "images/bg1.jpg";
+  const bg = new Image();
+  bg.src = getBgName();
   bg.onload = function(){
     ctx.drawImage(bg, 0, 0);
     initCanvas();
   };
+  function getBgName(val) {
+    const num = (val) ? val : getRandomInt(bgImageNum);
+    return bgImagePath + 'bg' + num + '.jpg';
+  }
+  function getRandomInt(max) {
+    const result =  Math.floor(Math.random() * Math.floor(max));
+    return Math.max(1, result);
+  }
 
-  var pen = new Image();
+  const pen = new Image();
   pen.src = penImage;
-  var eraser = new Image();
+  const eraser = new Image();
   eraser.src = eraserImage;
 
   let prevSec = new Date() * 1;
@@ -188,8 +200,23 @@ $(function(){
   });
 
   $('#btn-flat').on('click', function(){
-    ctx.fillStyle = 'rgb(200, 200, 200)';
-    ctx.fillRect(0, 0, c_width, c_height);
+    let result = window.confirm(flatConfirmText);
+    if(result){
+      ctx.fillStyle = flatStyle;
+      ctx.fillRect(0, 0, c_width, c_height);
+      updateCanvas();
+    }
+  });
+
+  $('#btn-rotate').on('click', function(){
+    const saveBg = new Image();
+    saveBg.src = canvas.toDataURL("image/png");
+    ctx.save();
+    ctx.translate(c_width/2, c_height/2);
+    ctx.rotate(Math.PI / 2);
+    ctx.translate(-c_height/2, -c_width/2);
+    ctx.drawImage(saveBg, 0, 0, c_width, c_height, 0, 0, c_height, c_width);
+    ctx.restore();
     updateCanvas();
   });
   // Controls -------------------------------------
