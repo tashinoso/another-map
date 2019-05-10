@@ -81,10 +81,11 @@ a:hover {
 #wrapper {
   width: 642px;
   margin: 0 auto;
+  padding-bottom: 80px;
 }
 #content {
   position: relative;
-  margin: 10px 0 80px 0;
+  margin: 10px 0 10px 0;
   width: 640px;
   height: 640px;
   box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
@@ -212,4 +213,13 @@ button#btn-resize-exec:focus,
 button#btn-resize-exec:active {
   background-color: #05a081;
   opacity: 0.7;
+}
+#options {
+  margin-top: 40px;
+  display: flex;
+  color: #5b524f;
+  font-size: 14px;
+}
+#options > *{
+  margin: 0 15px;
 }

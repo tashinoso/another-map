@@ -33,6 +33,7 @@ $(function(){
       hash = Math.min(bgImageNum, hash);
     }
     const num = (hash) ? hash : getRandomInt(bgImageNum);
+    $('#map-num').html('#' + num);
     console.log('map #' + num);
     return bgImagePath + 'bg' + num + '.jpg';
   }
@@ -224,6 +225,12 @@ $(function(){
     ctx.drawImage(saveBg, 0, 0, c_width, c_height, 0, 0, c_height, c_width);
     ctx.restore();
     updateCanvas();
+  });
+
+  $('#show-grayscale').on('change', function(){
+    const checked = $(this).prop('checked');
+    const opacity = ($(this).prop('checked')) ? 1.0 : 0;
+    $('#canv-draw').css('opacity', opacity);
   });
   // Controls -------------------------------------
 

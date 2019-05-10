@@ -28,6 +28,75 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+  <header id="page-header">
+    <span id="page-menu"><i class="fas fa-bars"></i></span>
+    <h1 id="page-title">Another Map</h1>
+    <div>
+      <a href="https://twitter.com/tashinoso" class="twitter-link" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://twitter.com/tashinoso" class="" target="_blank"><i class="far fa-question-circle"></i></a>
+    </div>
+  </header>
+  <div id="wrapper">
+    <div id="controls">
+      <nav class="bar">
+        <div class="group">
+          <button id="btn-pen-up" class="active"><i class="fas fa-mountains"></i><i class="far fa-long-arrow-alt-up"></i></button>
+          <button id="btn-pen-down" class=""><i class="fas fa-cloud-showers-heavy"></i><i class="far fa-long-arrow-alt-down"></i></button>
+        </div>
+        <div class="group">
+          <div id="slider-pen-size" class="slider"></div>
+        </div>
+        <div class="group">
+          <button id="btn-rotate"><i class="fas fa-redo-alt"></i></button>
+          <button id="btn-flat"><i class="far fa-water-lower"></i></button>
+          <button id="btn-resize"><i class="fas fa-ruler-combined"></i></button>
+          <button id="btn-download"><i class="fas fa-download"></i></button>
+        </div>
+      </nav>
+      <div id="resize-control">
+        <div class="bar">
+          <div class="group">
+            <i class="fas fa-arrows-alt-h"></i>
+            <input type="text" id="resize-w" value="640">
+          </div>
+          <div class="group">
+            <i class="fas fa-arrows-alt-v"></i>
+            <input type="text" id="resize-h" value="640">
+          </div>
+          <div class="group">
+            <button id="btn-resize-exec" class="">Resize</button>
+            <button id="btn-resize-cancel" class="">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="content">
+      <canvas id="canv-draw"></canvas>
+      <div id="canv-shade"><div id="pointer"></div></div>
+    </div>
+    <div id="options">
+      <span id="map-num"></span>
+      <div>
+        <label>
+          <input type="checkbox" id="show-grayscale" value="1">grayscale
+        </label>
+      </div>
+    </div>
+
+  </div>
+  <footer id="page-footer">
+    <div id="sns-buttons">
+        <a class="twitter-share-button"
+        href="https://twitter.com/intent/tweet">
+      Tweet</a>
+      <div class="fb-like" data-href="http://tashinoso.xyz/mapgen/" data-width="" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
+      <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-counter" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+    </div>
+  
+    <p class="footer-title">Another Map</p>
+    <a href="https://twitter.com/tashinoso">@tashinoso</a>
+  </footer>
+
   <!-- Load Facebook SDK for JavaScript -->
   <div id="fb-root"></div>
   <script>(function(d, s, id) {
@@ -53,64 +122,16 @@
   
     return t;
   }(document, "script", "twitter-wjs"));</script>
-  <header id="page-header">
-    <span id="page-menu"><i class="fas fa-bars"></i></span>
-    <h1 id="page-title">Another Map</h1>
-    <div>
-      <a href="https://twitter.com/tashinoso" class="twitter-link" target="_blank"><i class="fab fa-twitter"></i></a>
-      <a href="https://twitter.com/tashinoso" class="" target="_blank"><i class="far fa-question-circle"></i></a>
-    </div>
-  </header>
-  <div id="wrapper">
-    <div id="controls">
-      <nav class="bar">
-        <div class="group">
-          <button id="btn-pen-up" class="active"><i class="fas fa-mountains"></i><i class="far fa-long-arrow-alt-up"></i></button>
-          <button id="btn-pen-down" class=""><i class="fas fa-cloud-showers-heavy"></i><i class="far fa-long-arrow-alt-down"></i></button>
-        </div>
-        <div class="group">
-          <div id="slider-pen-size" class="slider"></div>
-        </div>
-        <div class="group">
-          <button id="btn-rotate"><i class="fas fa-redo-alt"></i></button>
-          <button id="btn-flat"><i class="far fa-water-lower"></i></button>
-          <button id="btn-resize"><i class="fas fa-ruler-combined"></i></button>
-          <button id="btn-download"><i class="far fa-image"></i></button>
-        </div>
-      </nav>
-      <div id="resize-control">
-        <div class="bar">
-          <div class="group">
-            <i class="fas fa-arrows-alt-h"></i>
-            <input type="text" id="resize-w" value="640">
-          </div>
-          <div class="group">
-            <i class="fas fa-arrows-alt-v"></i>
-            <input type="text" id="resize-h" value="640">
-          </div>
-          <div class="group">
-            <button id="btn-resize-exec" class="">Resize</button>
-            <button id="btn-resize-cancel" class="">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="content">
-      <canvas id="canv-draw"></canvas>
-      <div id="canv-shade"><div id="pointer"></div></div>
-    </div>
-  </div>
-  <footer id="page-footer">
-    <div id="sns-buttons">
-        <a class="twitter-share-button"
-        href="https://twitter.com/intent/tweet">
-      Tweet</a>
-      <div class="fb-like" data-href="http://tashinoso.xyz/mapgen/" data-width="" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
-      <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-counter" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-    </div>
-  
-    <p class="footer-title">Another Map</p>
-    <a href="https://twitter.com/tashinoso">@tashinoso</a>
-  </footer>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-11489359-7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-11489359-7');
+</script>
+
 </body>
 </html>
