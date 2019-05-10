@@ -21,9 +21,9 @@ $(function(){
   };
 
   var pen = new Image();
-  pen.src = "images/pen1.png";
+  pen.src = "images/pen2_b.png";
   var eraser = new Image();
-  eraser.src = "images/eraser1.png";
+  eraser.src = "images/pen2_w.png";
 
   let prevSec = new Date() * 1;
   function draw(e) {
@@ -89,7 +89,7 @@ $(function(){
   $('#canv-shade').append(app.view);
 
   // Set Filter
-  const tex = PIXI.Sprite.from('images/map_height.jpg');
+  const tex = PIXI.Sprite.from('images/map_height.png');
   let myFilter = new PIXI.filters.MyFilter(tex.texture);
   app.stage.filters = [myFilter];
 
@@ -122,7 +122,7 @@ $(function(){
     }
     setTimeout(function(){
       layer2.texture = newTex;
-    }, 10);
+    }, 30);
   }
   // PIXI -------------------------------------
 
