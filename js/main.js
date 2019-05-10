@@ -17,7 +17,7 @@ $(function(){
   bg.src = "images/bg1.jpg";
   bg.onload = function(){
     ctx.drawImage(bg, 0, 0);
-    updateCanvas();
+    initCanvas();
   };
 
   var pen = new Image();
@@ -93,14 +93,36 @@ $(function(){
   let myFilter = new PIXI.filters.MyFilter(tex.texture);
   app.stage.filters = [myFilter];
 
-  // Add Background
-  const setBackground = function(loader, resources) {
-    let img = new PIXI.Sprite(resources.img.texture);
-    app.stage.addChild(img);
+  // Init Background
+  let layer1 = null;
+  let layer2 = null;
+  const initBackground = function(loader, resources) {
+    layer1 = new PIXI.Sprite(resources.img.texture);
+    layer2 = new PIXI.Sprite(resources.img.texture);
+    app.stage.addChild(layer2);
+    app.stage.addChild(layer1);
   };
 
+  function initCanvas() {
+    const loader = new PIXI.Loader();
+    loader.reset();
+    loader.add('img', canvas.toDataURL("image/png"));
+    loader.load(initBackground);
+  }
+
+  let updateTimer = null;
+  let newTex = null;
   function updateCanvas() {
-    PIXI.loader.reset().add('img', canvas.toDataURL("image/png")).load(setBackground);
+    newTex = PIXI.Texture.from(canvas.toDataURL("image/png"));
+    layer1.texture = newTex;
+
+    if(updateTimer) {
+      window.clearTimeout(updateTimer);
+      updateTimer = null;
+    }
+    setTimeout(function(){
+      layer2.texture = newTex;
+    }, 10);
   }
   // PIXI -------------------------------------
 
