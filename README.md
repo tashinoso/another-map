@@ -4,4 +4,4 @@ DEMO
 http://tashinoso.xyz/mapgen/
 
 License
-BSD License
+MIT License
