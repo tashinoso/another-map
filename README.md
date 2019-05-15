@@ -1,7 +1,7 @@
 # another-map
 
-DEMO
+### DEMO
 http://tashinoso.xyz/mapgen/
 
-License
+### License
 MIT License

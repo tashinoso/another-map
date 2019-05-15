@@ -1,4 +1,5 @@
 $(function(){
+  const version = '0.0.1';
   const penImage = 'images/pen1_b.png';
   const eraserImage = 'images/pen1_w.png';
   const hightTexImage = 'images/map_height.png';
@@ -7,8 +8,9 @@ $(function(){
   const downloadFileName = 'anothermap_image';
   const penScales = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 5.0];
   const penSize = 50.0;
-  const flatConfirmText = 'すべての陸地を海に沈めます。\nよろしいですか？\n';
+  const flatConfirmText = 'You sink all land to the sea.\nIs it OK?\n';
   const flatStyle = 'rgb(245, 245, 245)';
+  const footerText = 'made by Another Map';
 
   let penScale = 1.0;
   let isEraser = false;
@@ -20,12 +22,15 @@ $(function(){
   canvas.width = c_width;
   canvas.height = c_height; 
 
+  console.log('version:' + version);
+
   const bg = new Image();
   bg.src = getBgName();
-  bg.onload = function(){
-    ctx.drawImage(bg, 0, 0);
-    initCanvas();
-  };
+  const pen = new Image();
+  pen.src = penImage;
+  const eraser = new Image();
+  eraser.src = eraserImage;
+
   function getBgName() {
     let hash = (location.hash.length >= 2) ? parseInt(location.hash.replace('#', '')) : null;
     if(hash) {
@@ -41,11 +46,10 @@ $(function(){
     const result =  Math.floor(Math.random() * Math.floor(max));
     return Math.max(1, result);
   }
-
-  const pen = new Image();
-  pen.src = penImage;
-  const eraser = new Image();
-  eraser.src = eraserImage;
+  bg.onload = function(){
+    ctx.drawImage(bg, 0, 0);
+    initCanvas();
+  };
 
   let prevSec = new Date() * 1;
   function draw(e) {
@@ -100,6 +104,7 @@ $(function(){
     app.view.width = c_width;
     app.view.height = c_height; 
     updateCanvas();
+    setupFooter();
   }
 
   // PIXI -------------------------------------
@@ -110,25 +115,36 @@ $(function(){
   });
   $('#canv-shade').append(app.view);
 
-  // Set Filter
-  const tex = PIXI.Sprite.from(hightTexImage);
-  let myFilter = new PIXI.filters.MyFilter(tex.texture);
-  app.stage.filters = [myFilter];
-
-  // Init Background
+  const stage = new PIXI.Container();
+  const footer = new PIXI.Text(footerText, {fontSize:11, fontFamily:'Arial', fontWeight:100, fill:'#465682'});
   let layer1 = null;
   let layer2 = null;
+  // Init Background
   const initBackground = function(loader, resources) {
     layer1 = new PIXI.Sprite(resources.img.texture);
     layer2 = new PIXI.Sprite(resources.img.texture);
-    app.stage.addChild(layer2);
-    app.stage.addChild(layer1);
+    stage.addChild(layer2);
+    stage.addChild(layer1);
+    app.stage.addChild(stage);
+    app.stage.addChild(footer);
+    setupFilter(resources.tex.texture);
+    setupFooter();
   };
+  function setupFilter(tex){
+    const utex = tex;
+    let myFilter = new PIXI.filters.MyFilter(utex);
+    stage.filters = [myFilter];
+  }
+  function setupFooter() {
+    footer.position.x = c_width - 115;
+    footer.position.y = c_height - 15;
+  }
 
   function initCanvas() {
     const loader = new PIXI.Loader();
     loader.reset();
     loader.add('img', canvas.toDataURL("image/png"));
+    loader.add('tex', hightTexImage);
     loader.load(initBackground);
   }
 
