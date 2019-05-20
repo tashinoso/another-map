@@ -242,13 +242,45 @@ $(function(){
     ctx.restore();
     updateCanvas();
   });
+  // Controls -------------------------------------
 
+  // Options -------------------------------------
   $('#show-grayscale').on('change', function(){
     const checked = $(this).prop('checked');
     const opacity = ($(this).prop('checked')) ? 1.0 : 0;
     $('#canv-draw').css('opacity', opacity);
   });
-  // Controls -------------------------------------
+
+  $('#btn-upload-file').on('click', function(){
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.jpg, .jpeg, png';
+    input.onchange = function(e) {
+      uploadFile(e.target.files[0]);
+    };
+    input.click();
+  });
+
+  function uploadFile(file) {
+    const uploadBg = new Image();
+    uploadBg.src = window.URL.createObjectURL(file);
+    uploadBg.onload = function(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const c_width = uploadBg.naturalWidth;
+      const c_height = uploadBg.naturalHeight;
+      $('#wrapper').width(c_width);
+      $('#content').width(c_width);
+      $('#content').height(c_height);
+      canvas.width = c_width;
+      canvas.height = c_height; 
+      ctx.drawImage(uploadBg, 0, 0);
+      app.view.width = c_width;
+      app.view.height = c_height; 
+      updateCanvas();
+    }
+  }
+
+  // Options -------------------------------------
 
 
 });
